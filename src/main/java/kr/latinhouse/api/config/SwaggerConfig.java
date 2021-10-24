@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .groupName("default")
                 .apiInfo(this.apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("kr.latinhouse .api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("kr.latinhouse.api.controller"))
                 .paths(PathSelectors.ant("/api/**"))
                 .build();
     }
