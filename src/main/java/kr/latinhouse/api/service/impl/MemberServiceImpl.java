@@ -1,8 +1,8 @@
 package kr.latinhouse.api.service.impl;
 
-import kr.latinhouse.api.domain.members.MemberM;
-import kr.latinhouse.api.repository.members.MembersRepository;
-import kr.latinhouse.api.service.MembersService;
+import kr.latinhouse.api.domain.MemberM;
+import kr.latinhouse.api.repository.member.MemberRepository;
+import kr.latinhouse.api.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class MembersServiceImpl implements MembersService {
+public class MemberServiceImpl implements MemberService {
 
-    private final MembersRepository membersRepository;
+    private final MemberRepository memberRepository;
 
     public List<MemberM> members() {
-        return membersRepository.findAll().stream()
+        return memberRepository.findAll().stream()
                 .map(MemberM::new)
                 .collect(Collectors.toList());
     }

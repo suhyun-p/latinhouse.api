@@ -1,9 +1,9 @@
 package kr.latinhouse.api.service;
 
-import kr.latinhouse.api.domain.members.MemberM;
+import kr.latinhouse.api.domain.MemberM;
 
 import java.util.List;
 
-public interface MembersService {
+public interface MemberService {
     List<MemberM> members();
 }

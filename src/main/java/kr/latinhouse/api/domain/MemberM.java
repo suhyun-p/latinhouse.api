@@ -1,6 +1,6 @@
-package kr.latinhouse.api.domain.members;
+package kr.latinhouse.api.domain;
 
-import kr.latinhouse.api.repository.members.dto.MemberMain;
+import kr.latinhouse.api.repository.member.dto.MemberMain;
 import lombok.Data;
 
 @Data
