@@ -1,7 +1,9 @@
 package kr.latinhouse.api.controller;
 
+import kr.latinhouse.api.domain.ClassM;
 import kr.latinhouse.api.domain.MemberM;
-import kr.latinhouse.api.service.MemberService;
+import kr.latinhouse.api.service.classes.ClassesService;
+import kr.latinhouse.api.service.memers.MembersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class MemberController {
+public class ClassesController {
 
     @Autowired
-    MemberService memberService;
+    ClassesService classesService;
 
-    @GetMapping("/members")
-    public List<MemberM> members() { return memberService.members(); }
+    @GetMapping("/classes")
+    public List<ClassM> classes() { return classesService.classes(); }
 }

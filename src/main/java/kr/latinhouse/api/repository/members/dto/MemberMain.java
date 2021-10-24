@@ -1,4 +1,4 @@
-package kr.latinhouse.api.repository.member.dto;
+package kr.latinhouse.api.repository.members.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
