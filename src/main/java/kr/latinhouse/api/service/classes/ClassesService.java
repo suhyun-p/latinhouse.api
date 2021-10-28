@@ -1,10 +1,10 @@
 package kr.latinhouse.api.service.classes;
 
-import kr.latinhouse.api.domain.ClassM;
-import kr.latinhouse.api.domain.MemberM;
+import kr.latinhouse.api.domain.classes.ClassInfo;
 
 import java.util.List;
 
 public interface ClassesService {
-    List<ClassM> classes();
+    List<ClassInfo> classes();
+    ClassInfo classes(long classNo);
 }

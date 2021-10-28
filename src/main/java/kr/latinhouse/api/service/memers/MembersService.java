@@ -1,9 +1,10 @@
 package kr.latinhouse.api.service.memers;
 
-import kr.latinhouse.api.domain.MemberM;
+import kr.latinhouse.api.domain.memers.MemberInfo;
 
 import java.util.List;
 
 public interface MembersService {
-    List<MemberM> members();
+    List<MemberInfo> members();
+    MemberInfo members(long memberNo);
 }
