@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "class_main")
 public class ClassMain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_no", nullable = false)
     private Long classNo;
 
     @Column(name = "title")
@@ -43,4 +43,20 @@ public class ClassMain {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="class_no")
+    private List<ClassSchedule> classScheduleList;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="class_no")
+    private List<ClassDiscount> classDiscountList;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="class_no")
+    private List<ClassNotice> classNoticeList;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="class_no")
+    private List<ClassContact> classContactList;
 }

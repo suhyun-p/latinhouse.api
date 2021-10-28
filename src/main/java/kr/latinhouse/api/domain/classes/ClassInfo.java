@@ -3,13 +3,17 @@ package kr.latinhouse.api.domain.classes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kr.latinhouse.api.domain.memers.MemberInfo;
 import kr.latinhouse.api.repository.classes.dto.ClassMain;
+import kr.latinhouse.api.repository.classes.dto.ClassSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -28,6 +32,7 @@ public class ClassInfo {
     private String instructorNickname2;
     private String location;
     private BigDecimal price;
+    private List<ClassScheduleInfo> scheduleList;
 
     public ClassInfo(ClassMain t, MemberInfo instructor1, MemberInfo instructor2) {
         this.setClassNo(t.getClassNo());
@@ -43,5 +48,11 @@ public class ClassInfo {
         });
         this.setLocation(t.getLocation());
         this.setPrice(t.getPrice());
+
+        List<ClassScheduleInfo> scheduleList = new ArrayList<>();
+        for(ClassSchedule schedule : t.getClassScheduleList()) {
+            scheduleList.add(new ClassScheduleInfo(schedule));
+        }
+        this.setScheduleList(scheduleList.isEmpty() ? null : scheduleList);
     }
 }
