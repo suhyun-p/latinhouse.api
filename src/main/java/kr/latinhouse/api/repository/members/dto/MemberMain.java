@@ -1,12 +1,14 @@
 package kr.latinhouse.api.repository.members.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import kr.latinhouse.api.repository.classes.dto.ClassContact;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +29,8 @@ public class MemberMain {
 
     @Column(name = "is_instructor")
     private Boolean isInstructor;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="member_no")
+    private List<MemberContact> memberContactList;
 }

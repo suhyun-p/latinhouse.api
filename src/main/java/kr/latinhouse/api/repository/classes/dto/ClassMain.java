@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -38,15 +39,29 @@ public class ClassMain {
     @Column(name = "instructor_no_2")
     private Long instructorNo2;
 
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "date_desc")
+    private String dateDesc;
+
+    @Column(name = "start_time")
+    private String startTime;
+
+    @Column(name = "end_time")
+    private String endTime;
+
+    @Column(name = "time_desc")
+    private String timeDesc;
+
     @Column(name = "location")
     private String location;
 
     @Column(name = "price")
     private BigDecimal price;
-
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name="class_no")
-    private List<ClassSchedule> classScheduleList;
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name="class_no")

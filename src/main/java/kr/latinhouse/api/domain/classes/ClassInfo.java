@@ -2,17 +2,20 @@ package kr.latinhouse.api.domain.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kr.latinhouse.api.domain.memers.MemberInfo;
-import kr.latinhouse.api.repository.classes.dto.*;
+import kr.latinhouse.api.repository.classes.dto.ClassContact;
+import kr.latinhouse.api.repository.classes.dto.ClassDiscount;
+import kr.latinhouse.api.repository.classes.dto.ClassMain;
+import kr.latinhouse.api.repository.classes.dto.ClassNotice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -31,9 +34,12 @@ public class ClassInfo {
     private String instructorNickname2;
     private String startDate;
     private String endDate;
+    private String dateDesc;
+    private String startTime;
+    private String endTime;
+    private String timeDesc;
     private String location;
     private BigDecimal price;
-    private List<ClassScheduleInfo> scheduleList;
     private List<ClassDiscountInfo> discountList;
     private List<ClassContactInfo> contactList;
     private List<ClassNoticeInfo> noticeList;
@@ -41,7 +47,7 @@ public class ClassInfo {
     public ClassInfo(ClassMain t, MemberInfo instructor1, MemberInfo instructor2) {
         this.setClassNo(t.getClassNo());
         this.setTitle(t.getTitle());
-        this.setStatus(t.getStatus());
+        // this.setStatus(t.getStatus());
         this.setGenre(t.getGenre());
         this.setRegion(t.getRegion());
         this.setInstructorNo1(instructor1.getMemberNo());
@@ -50,13 +56,14 @@ public class ClassInfo {
             this.setInstructorNo2(i.getMemberNo());
             this.setInstructorNickname2(i.getNickname());
         });
+        this.setStartDate(new SimpleDateFormat("MM/dd").format(t.getStartDate()));
+        this.setEndDate(new SimpleDateFormat("MM/dd").format(t.getEndDate()));
+        this.setDateDesc(t.getDateDesc());
+        this.setStartTime(t.getStartTime());
+        this.setEndTime(t.getEndTime());
+        this.setTimeDesc(t.getTimeDesc());
         this.setLocation(t.getLocation());
         this.setPrice(t.getPrice());
-
-        List<ClassScheduleInfo> scheduleList = new ArrayList<>();
-        for(ClassSchedule schedule : t.getClassScheduleList())
-            scheduleList.add(new ClassScheduleInfo(schedule));
-        this.setScheduleList(scheduleList.isEmpty() ? null : scheduleList);
 
         List<ClassDiscountInfo> discountList = new ArrayList<>();
         for(ClassDiscount discount : t.getClassDiscountList())
