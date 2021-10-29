@@ -2,8 +2,7 @@ package kr.latinhouse.api.domain.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kr.latinhouse.api.domain.memers.MemberInfo;
-import kr.latinhouse.api.repository.classes.dto.ClassMain;
-import kr.latinhouse.api.repository.classes.dto.ClassSchedule;
+import kr.latinhouse.api.repository.classes.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,9 +29,14 @@ public class ClassInfo {
     private String instructorNickname1;
     private Long instructorNo2;
     private String instructorNickname2;
+    private String startDate;
+    private String endDate;
     private String location;
     private BigDecimal price;
     private List<ClassScheduleInfo> scheduleList;
+    private List<ClassDiscountInfo> discountList;
+    private List<ClassContactInfo> contactList;
+    private List<ClassNoticeInfo> noticeList;
 
     public ClassInfo(ClassMain t, MemberInfo instructor1, MemberInfo instructor2) {
         this.setClassNo(t.getClassNo());
@@ -50,9 +54,23 @@ public class ClassInfo {
         this.setPrice(t.getPrice());
 
         List<ClassScheduleInfo> scheduleList = new ArrayList<>();
-        for(ClassSchedule schedule : t.getClassScheduleList()) {
+        for(ClassSchedule schedule : t.getClassScheduleList())
             scheduleList.add(new ClassScheduleInfo(schedule));
-        }
         this.setScheduleList(scheduleList.isEmpty() ? null : scheduleList);
+
+        List<ClassDiscountInfo> discountList = new ArrayList<>();
+        for(ClassDiscount discount : t.getClassDiscountList())
+            discountList.add(new ClassDiscountInfo(discount));
+        this.setDiscountList(discountList.isEmpty() ? null : discountList);
+
+        List<ClassContactInfo> contactList = new ArrayList<>();
+        for(ClassContact contact : t.getClassContactList())
+            contactList.add(new ClassContactInfo(contact));
+        this.setContactList(contactList.isEmpty() ? null : contactList);
+
+        List<ClassNoticeInfo> noticeList = new ArrayList<>();
+        for(ClassNotice notice : t.getClassNoticeList())
+            noticeList.add(new ClassNoticeInfo(notice));
+        this.setNoticeList(noticeList.isEmpty() ? null : noticeList);
     }
 }
