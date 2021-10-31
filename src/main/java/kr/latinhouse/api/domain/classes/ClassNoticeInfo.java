@@ -15,7 +15,7 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassNoticeInfo {
-    private String noticeType;
+    private String noticeType; // N: Normal, D: Delay, E: Emergency
     private String notice;
 
     public ClassNoticeInfo(ClassNotice t) {

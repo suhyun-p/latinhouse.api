@@ -16,7 +16,7 @@ import javax.persistence.Column;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassContactInfo {
     private String nickname;
-    private String contactType;
+    private String contactType; // K: KakaoTalk, C: Cellphone
     private String contact;
 
     public ClassContactInfo(ClassContact t) {

@@ -16,8 +16,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassDiscountInfo {
-    private String discountType;
+    private String discountType; // E: EarlyBird, C: 커플할인, F: 선착순, S: 타 과목 동시신청 시 할인, M: 멤버 할인
     private String discountCondition;
+    private String discountText;
     private BigDecimal discountAmount;
 
     public ClassDiscountInfo(ClassDiscount t) {

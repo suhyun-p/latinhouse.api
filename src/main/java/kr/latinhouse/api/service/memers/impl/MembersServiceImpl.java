@@ -2,6 +2,7 @@ package kr.latinhouse.api.service.memers.impl;
 
 import kr.latinhouse.api.domain.classes.ClassInfo;
 import kr.latinhouse.api.domain.memers.MemberInfo;
+import kr.latinhouse.api.repository.classes.dto.ClassContact;
 import kr.latinhouse.api.repository.classes.dto.ClassMain;
 import kr.latinhouse.api.repository.members.MembersRepository;
 import kr.latinhouse.api.repository.members.dto.MemberMain;
