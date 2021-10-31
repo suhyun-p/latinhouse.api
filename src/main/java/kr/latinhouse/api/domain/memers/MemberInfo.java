@@ -23,7 +23,7 @@ public class MemberInfo {
     private Boolean isInstructor;
     private List<MemberContactInfo> contactList;
 
-    public MemberInfo(MemberMain t) {
+    public void update(MemberMain t) {
         this.setMemberNo(t.getMemberNo());
         this.setNickname(t.getNickname());
         this.setSex(t.getSex());

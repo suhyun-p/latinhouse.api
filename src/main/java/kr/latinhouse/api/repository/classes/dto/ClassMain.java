@@ -1,6 +1,7 @@
 package kr.latinhouse.api.repository.classes.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import kr.latinhouse.api.repository.members.dto.MemberMain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,11 +34,13 @@ public class ClassMain {
     @Column(name = "region")
     private String region;
 
-    @Column(name = "instructor_no_1")
-    private Long instructorNo1;
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="instructor_no_1")
+    private MemberMain instructor1;
 
-    @Column(name = "instructor_no_2")
-    private Long instructorNo2;
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="instructor_no_2")
+    private MemberMain instructor2;
 
     @Column(name = "start_date")
     private Date startDate;

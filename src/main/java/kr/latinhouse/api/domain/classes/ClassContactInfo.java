@@ -15,12 +15,12 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassContactInfo {
-    private long memberNo;
+    private String nickname;
     private String contactType;
     private String contact;
 
     public ClassContactInfo(ClassContact t) {
-        this.setMemberNo(t.getMemberNo());
+        // this.setNickname(t.getMemberNo());
         this.setContactType(t.getContactType());
         this.setContact(t.getContact());
     }

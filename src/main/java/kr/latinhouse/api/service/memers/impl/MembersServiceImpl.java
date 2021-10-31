@@ -21,21 +21,20 @@ public class MembersServiceImpl implements MembersService {
     private final MembersRepository membersRepository;
 
     public List<MemberInfo> members() {
-        return membersRepository.findAll().stream()
-                .map(MemberInfo::new)
-                .collect(Collectors.toList());
+        List<MemberInfo> memberInfos = new ArrayList<>();
+        membersRepository.findAll().stream().forEach(memberMain -> {
+            MemberInfo memberInfo = new MemberInfo();
+            memberInfo.update(memberMain);
+            memberInfos.add(memberInfo);
+        });
+        return memberInfos.isEmpty() ? null : memberInfos;
     }
 
     public MemberInfo members(long memberNo) {
         MemberInfo memberInfo = new MemberInfo();
-
-        Optional<MemberMain> memberMain = membersRepository.findById(memberNo);
-        if(memberMain.isPresent()) memberInfo = this.convertTo(memberMain.get());
-
-        return memberInfo.equals(new ClassInfo()) ? null : memberInfo;
-    }
-
-    private MemberInfo convertTo(MemberMain memberMain) {
-        return new MemberInfo(memberMain);
+        membersRepository.findById(memberNo).ifPresent(memberMain -> {
+            memberInfo.update(memberMain);
+        });
+        return memberInfo.equals(new MemberInfo()) ? null : memberInfo;
     }
 }

@@ -23,7 +23,7 @@ public class ClassContact {
     private Long classNo;
 
     @Column(name = "member_no")
-    private long memberNo;
+    private Long memberNo;
 
     @Column(name = "contact_type")
     private String contactType;

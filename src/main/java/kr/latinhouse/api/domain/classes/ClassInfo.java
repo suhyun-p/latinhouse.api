@@ -44,15 +44,15 @@ public class ClassInfo {
     private List<ClassContactInfo> contactList;
     private List<ClassNoticeInfo> noticeList;
 
-    public ClassInfo(ClassMain t, MemberInfo instructor1, MemberInfo instructor2) {
+    public void update(ClassMain t) {
         this.setClassNo(t.getClassNo());
         this.setTitle(t.getTitle());
         // this.setStatus(t.getStatus());
         this.setGenre(t.getGenre());
         this.setRegion(t.getRegion());
-        this.setInstructorNo1(instructor1.getMemberNo());
-        this.setInstructorNickname1(instructor1.getNickname());
-        Optional.ofNullable(instructor2).ifPresent(i -> {
+        this.setInstructorNo1(t.getInstructor1().getMemberNo());
+        this.setInstructorNickname1(t.getInstructor1().getNickname());
+        Optional.ofNullable(t.getInstructor2()).ifPresent(i -> {
             this.setInstructorNo2(i.getMemberNo());
             this.setInstructorNickname2(i.getNickname());
         });
