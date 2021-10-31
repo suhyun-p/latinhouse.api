@@ -40,6 +40,7 @@ public class ClassInfo {
     private String timeDesc;
     private String location;
     private BigDecimal price;
+    private String account;
     private List<ClassDiscountInfo> discountList;
     private List<ClassContactInfo> contactList;
     private List<ClassNoticeInfo> noticeList;
@@ -64,16 +65,17 @@ public class ClassInfo {
         this.setTimeDesc(t.getTimeDesc());
         this.setLocation(t.getLocation());
         this.setPrice(t.getPrice());
+        this.setAccount(t.getAcount());
 
         List<ClassDiscountInfo> discountList = new ArrayList<>();
         for(ClassDiscount discount : t.getClassDiscountList())
             discountList.add(new ClassDiscountInfo(discount));
         this.setDiscountList(discountList.isEmpty() ? null : discountList);
 
-        List<ClassContactInfo> contactList = new ArrayList<>();
-        for(ClassContact contact : t.getClassContactList())
-            contactList.add(new ClassContactInfo(contact));
-        this.setContactList(contactList.isEmpty() ? null : contactList);
+//        List<ClassContactInfo> contactList = new ArrayList<>();
+//        for(ClassContact contact : t.getClassContactList())
+//            contactList.add(new ClassContactInfo(contact));
+//        this.setContactList(contactList.isEmpty() ? null : contactList);
 
         List<ClassNoticeInfo> noticeList = new ArrayList<>();
         for(ClassNotice notice : t.getClassNoticeList())

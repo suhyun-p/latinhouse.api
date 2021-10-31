@@ -30,6 +30,7 @@ create table IF NOT EXISTS class_main (
     time_desc varchar(255),
     location varchar(255),
     price decimal,
+    account varchar(255),
     primary key (class_no)
 );
 

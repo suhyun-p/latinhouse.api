@@ -66,6 +66,9 @@ public class ClassMain {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "account")
+    private String acount;
+
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name="class_no")
     private List<ClassDiscount> classDiscountList;
