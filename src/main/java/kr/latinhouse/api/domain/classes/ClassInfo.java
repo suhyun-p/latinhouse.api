@@ -46,40 +46,6 @@ public class ClassInfo {
     private List<ClassNoticeInfo> noticeList;
 
     public void update(ClassMain t) {
-        this.setClassNo(t.getClassNo());
-        this.setTitle(t.getTitle());
-        // this.setStatus(t.getStatus());
-        this.setGenre(t.getGenre());
-        this.setRegion(t.getRegion());
-        this.setInstructorNo1(t.getInstructor1().getMemberNo());
-        this.setInstructorNickname1(t.getInstructor1().getNickname());
-        Optional.ofNullable(t.getInstructor2()).ifPresent(i -> {
-            this.setInstructorNo2(i.getMemberNo());
-            this.setInstructorNickname2(i.getNickname());
-        });
-        this.setStartDate(new SimpleDateFormat("MM/dd").format(t.getStartDate()));
-        this.setEndDate(new SimpleDateFormat("MM/dd").format(t.getEndDate()));
-        this.setDateDesc(t.getDateDesc());
-        this.setStartTime(t.getStartTime());
-        this.setEndTime(t.getEndTime());
-        this.setTimeDesc(t.getTimeDesc());
-        this.setLocation(t.getLocation());
-        this.setPrice(t.getPrice());
-        this.setAccount(t.getAcount());
 
-        List<ClassDiscountInfo> discountList = new ArrayList<>();
-        for(ClassDiscount discount : t.getClassDiscountList())
-            discountList.add(new ClassDiscountInfo(discount));
-        this.setDiscountList(discountList.isEmpty() ? null : discountList);
-
-//        List<ClassContactInfo> contactList = new ArrayList<>();
-//        for(ClassContact contact : t.getClassContactList())
-//            contactList.add(new ClassContactInfo(contact));
-//        this.setContactList(contactList.isEmpty() ? null : contactList);
-
-        List<ClassNoticeInfo> noticeList = new ArrayList<>();
-        for(ClassNotice notice : t.getClassNoticeList())
-            noticeList.add(new ClassNoticeInfo(notice));
-        this.setNoticeList(noticeList.isEmpty() ? null : noticeList);
     }
 }

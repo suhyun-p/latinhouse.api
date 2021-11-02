@@ -18,10 +18,4 @@ public class ClassContactInfo {
     private String nickname;
     private String contactType; // K: KakaoTalk, C: Cellphone
     private String contact;
-
-    public ClassContactInfo(ClassContact t) {
-        // this.setNickname(t.getMemberNo());
-        this.setContactType(t.getContactType());
-        this.setContact(t.getContact());
-    }
 }
