@@ -1,9 +1,6 @@
 package kr.latinhouse.api.service.classes.impl;
 
-import kr.latinhouse.api.domain.classes.ClassContactInfo;
-import kr.latinhouse.api.domain.classes.ClassDiscountInfo;
-import kr.latinhouse.api.domain.classes.ClassInfo;
-import kr.latinhouse.api.domain.classes.ClassNoticeInfo;
+import kr.latinhouse.api.domain.classes.*;
 import kr.latinhouse.api.domain.memers.MemberContactInfo;
 import kr.latinhouse.api.domain.memers.MemberInfo;
 import kr.latinhouse.api.repository.classes.ClassesRepository;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,8 +68,31 @@ public class ClassesServiceImpl implements ClassesService {
         classInfo.setAccount(t.getAcount());
 
         List<ClassDiscountInfo> discountList = new ArrayList<>();
-        for(ClassDiscount discount : t.getClassDiscountList())
-            discountList.add(new ClassDiscountInfo(discount));
+        for(ClassDiscount discount : t.getClassDiscountList()) {
+            ClassDiscountInfo classDiscountInfo = ClassDiscountInfo.builder()
+                    .type(discount.getDiscountType())
+                    .text(discount.getDiscountText())
+                    .amount(discount.getDiscountAmount())
+                    .build();
+
+            switch (discount.getDiscountType()) {
+                case "E":
+                    classDiscountInfo.setTextCondition(discount.getDiscountCondition());
+                    break;
+                case "S":
+                    List<DiscountClassCondition> classConditionList = new ArrayList<>();
+                    for(String classNo : discount.getDiscountCondition().split(",")) {
+                        classConditionList.add(DiscountClassCondition.builder()
+                                .classNo(Long.parseLong(classNo))
+                                .classTitle(classesRepository.findById(Long.parseLong(classNo)).get().getTitle())
+                                .build());
+                    }
+                    classDiscountInfo.setClassConditionList(classConditionList);
+                    break;
+            }
+
+            discountList.add(classDiscountInfo);
+        }
         classInfo.setDiscountList(discountList.isEmpty() ? null : discountList);
 
         List<ClassContactInfo> contactList = new ArrayList<>();

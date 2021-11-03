@@ -26,6 +26,9 @@ public class ClassDiscount {
     @Column(name = "discount_type")
     private String discountType;
 
+    @Column(name = "discount_text")
+    private String discountText;
+
     @Column(name = "discount_condition")
     private String discountCondition;
 
