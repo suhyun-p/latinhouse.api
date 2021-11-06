@@ -35,10 +35,10 @@ public class ClassesServiceImpl implements ClassesService {
     private final ClassesRepository classesRepository;
     private final MembersService membersService;
 
-    public List<ClassInfo> classes() {
-        List<ClassInfo> classesList = new ArrayList<>();
+    public List<ClassSummary> classes() {
+        List<ClassSummary> classesList = new ArrayList<>();
         for(ClassMain classMain : classesRepository.findAll()) {
-            classesList.add(this.convertTo(classMain));
+            classesList.add(new ClassSummary(this.convertTo(classMain)));
         }
         return classesList.isEmpty() ? null : classesList;
     }

@@ -2,6 +2,7 @@ package kr.latinhouse.api.controller.classes;
 
 import kr.latinhouse.api.controller.classes.dto.ClassRequest;
 import kr.latinhouse.api.domain.classes.ClassInfo;
+import kr.latinhouse.api.domain.classes.ClassSummary;
 import kr.latinhouse.api.service.classes.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,7 @@ public class ClassesController {
     ClassesService classesService;
 
     @GetMapping("/classes")
-    public List<ClassInfo> classes() {
-        return classesService.classes(); }
+    public List<ClassSummary> classes() { return classesService.classes(); }
 
     @GetMapping("/classes/{classNo}")
     public ClassInfo classes(@PathVariable long classNo) { return classesService.classes(classNo); }
