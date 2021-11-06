@@ -1,4 +1,4 @@
-package kr.latinhouse.api.controller;
+package kr.latinhouse.api.controller.classes;
 
 import kr.latinhouse.api.domain.classes.ClassInfo;
 import kr.latinhouse.api.service.classes.ClassesService;

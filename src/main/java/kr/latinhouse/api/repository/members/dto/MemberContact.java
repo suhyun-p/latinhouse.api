@@ -1,5 +1,6 @@
 package kr.latinhouse.api.repository.members.dto;
 
+import kr.latinhouse.api.controller.members.dto.MemberContactRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,9 @@ public class MemberContact {
 
     @Column(name = "contact")
     private String contact;
+
+    public MemberContact(MemberContactRequest req) {
+        this.contactType = req.getContactType();
+        this.contact = req.getContact();
+    }
 }
