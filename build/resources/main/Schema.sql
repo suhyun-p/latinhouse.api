@@ -39,7 +39,8 @@ create table IF NOT EXISTS class_discount (
     class_no long,
     discount_type char(1),
     discount_text varchar(255),
-    discount_condition varchar(255),
+    discount_date_condition datetime,
+    discount_class_condition varchar(255),
     discount_amount decimal,
     primary key (seq)
 );

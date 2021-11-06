@@ -29,8 +29,11 @@ public class ClassDiscount {
     @Column(name = "discount_text")
     private String discountText;
 
-    @Column(name = "discount_condition")
-    private String discountCondition;
+    @Column(name = "discount_date_condition")
+    private Date discountDateCondition;
+
+    @Column(name = "discount_class_condition")
+    private String discountClassCondition;
 
     @Column(name = "discount_amount")
     private BigDecimal discountAmount;

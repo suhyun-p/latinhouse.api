@@ -2,6 +2,7 @@ package kr.latinhouse.api.service.classes;
 
 import kr.latinhouse.api.domain.classes.ClassInfo;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface ClassesService {

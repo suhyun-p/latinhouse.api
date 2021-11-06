@@ -18,7 +18,8 @@ public class ClassesController {
     ClassesService classesService;
 
     @GetMapping("/classes")
-    public List<ClassInfo> classes() { return classesService.classes(); }
+    public List<ClassInfo> classes() {
+        return classesService.classes(); }
 
     @GetMapping("/classes/{classNo}")
     public ClassInfo classes(@PathVariable long classNo) { return classesService.classes(classNo); }

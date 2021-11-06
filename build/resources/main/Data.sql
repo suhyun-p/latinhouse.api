@@ -23,8 +23,8 @@ insert into class_contact (class_no, member_no, contact_type, contact) values (2
 
 insert into class_main (title, status, genre, region, instructor_no_1, instructor_no_2, start_date, end_date, date_desc, start_time, end_time, time_desc, location, price, account)
 values ('센슈얼패턴 스킬 집중반', 'S2', 'B', 'HD', 3, 4, '2021-05-01', '2021-05-29', '총 5주, 매주 토요일', '18:00', '19:00', '60분', '세뇨리따홀(in 보니따)', 100000, '우리_전신영 180-08-244668');
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (3, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (3, 'S', '타 과목과 동시 신청 시 1만원 할인', '4,5', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_date_condition, discount_amount) values (3, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_class_condition, discount_amount) values (3, 'S', '타 과목과 동시 신청 시 1만원 할인', '4,5', 10000);
 insert into class_notice (class_no, notice_type, notice) values (3, 'N', '코로나 방역수칙 준수');
 insert into class_notice (class_no, notice_type, notice) values (3, 'N', '인원제한 진행');
 insert into class_contact (class_no, member_no, contact_type, contact) values (3, 3, 'K', null);
@@ -32,8 +32,8 @@ insert into class_contact (class_no, member_no, contact_type, contact) values (3
 
 insert into class_main (title, status, genre, region, instructor_no_1, instructor_no_2, start_date, end_date, date_desc, start_time, end_time, time_desc, location, price, account)
 values ('센슈얼 토탈 기본기 끝장반', 'S2', 'B', 'HD', 3, 1, '2021-05-01', '2021-05-29', '총 5주, 매주 토요일', '17:00', '18:00', '60분', '세뇨리따홀(in 보니따)', 100000, '우리_전신영 180-08-244668');
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (4, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (4, 'S', '타 과목과 동시 신청 시 1만원 할인', '3,5', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_date_condition, discount_amount) values (4, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_class_condition, discount_amount) values (4, 'S', '타 과목과 동시 신청 시 1만원 할인', '3,5', 10000);
 insert into class_notice (class_no, notice_type, notice) values (4, 'N', '코로나 방역수칙 준수');
 insert into class_notice (class_no, notice_type, notice) values (4, 'N', '인원제한 진행');
 insert into class_contact (class_no, member_no, contact_type, contact) values (4, 3, 'K', null);
@@ -41,8 +41,8 @@ insert into class_contact (class_no, member_no, contact_type, contact) values (4
 
 insert into class_main (title, status, genre, region, instructor_no_1, instructor_no_2, start_date, end_date, date_desc, start_time, end_time, time_desc, location, price, account)
 values ('홍대 클래스 주말반', 'S2', 'B', 'HD', 5, 6, '2021-05-01', '2021-05-29', '총 5주, 매주 토요일', '18:30', '19:30', '60분', '댄싱아일랜드', 100000, '우리_전신영 180-08-244668');
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (5, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
-insert into class_discount (class_no, discount_type, discount_text, discount_condition, discount_amount) values (5, 'S', '타 과목과 동시 신청 시 1만원 할인', '3,4', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_date_condition, discount_amount) values (5, 'E', '22일까지 신청 시 1만원 할인', '2021-05-22', 10000);
+insert into class_discount (class_no, discount_type, discount_text, discount_class_condition, discount_amount) values (5, 'S', '타 과목과 동시 신청 시 1만원 할인', '3,4', 10000);
 insert into class_notice (class_no, notice_type, notice) values (5, 'N', '코로나 방역수칙 준수');
 insert into class_notice (class_no, notice_type, notice) values (5, 'N', '인원제한 진행');
 insert into class_contact (class_no, member_no, contact_type, contact) values (5, 3, 'K', null);

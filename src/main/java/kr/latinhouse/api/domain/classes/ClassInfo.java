@@ -44,8 +44,4 @@ public class ClassInfo {
     private List<ClassDiscountInfo> discountList;
     private List<ClassContactInfo> contactList;
     private List<ClassNoticeInfo> noticeList;
-
-    public void update(ClassMain t) {
-
-    }
 }

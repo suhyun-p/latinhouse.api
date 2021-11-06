@@ -7,17 +7,17 @@ import kr.latinhouse.api.repository.classes.ClassesRepository;
 import kr.latinhouse.api.repository.classes.dto.ClassContact;
 import kr.latinhouse.api.repository.classes.dto.ClassDiscount;
 import kr.latinhouse.api.repository.classes.dto.ClassMain;
-import kr.latinhouse.api.repository.classes.dto.ClassNotice;
+import kr.latinhouse.api.repository.members.dto.MemberMain;
 import kr.latinhouse.api.service.classes.ClassesService;
 import kr.latinhouse.api.service.memers.MembersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -27,67 +27,64 @@ public class ClassesServiceImpl implements ClassesService {
 
     public List<ClassInfo> classes() {
         List<ClassInfo> classesList = new ArrayList<>();
-
-        for(ClassMain classMain : classesRepository.findAll())
+        for(ClassMain classMain : classesRepository.findAll()) {
             classesList.add(this.convertTo(classMain));
-
+        }
         return classesList.isEmpty() ? null : classesList;
     }
 
     public ClassInfo classes(long classNo) {
         ClassInfo classInfo = new ClassInfo();
-
-        if(classesRepository.findById(classNo).isPresent())
+        if(classesRepository.findById(classNo).isPresent()) {
             classInfo = this.convertTo(classesRepository.findById(classNo).get());
-
+        }
         return classInfo.equals(new ClassInfo()) ? null : classInfo;
     }
 
     private ClassInfo convertTo(ClassMain t) {
-        ClassInfo classInfo = new ClassInfo();
 
-        classInfo.setClassNo(t.getClassNo());
-        classInfo.setTitle(t.getTitle());
-        classInfo.setStatus(t.getStatus());
-        classInfo.setGenre(t.getGenre());
-        classInfo.setRegion(t.getRegion());
-        classInfo.setInstructorNo1(t.getInstructor1().getMemberNo());
-        classInfo.setInstructorNickname1(t.getInstructor1().getNickname());
-        Optional.ofNullable(t.getInstructor2()).ifPresent(i -> {
-            classInfo.setInstructorNo2(i.getMemberNo());
-            classInfo.setInstructorNickname2(i.getNickname());
-        });
-        classInfo.setStartDate(new SimpleDateFormat("MM/dd").format(t.getStartDate()));
-        classInfo.setEndDate(new SimpleDateFormat("MM/dd").format(t.getEndDate()));
-        classInfo.setDateDesc(t.getDateDesc());
-        classInfo.setStartTime(t.getStartTime());
-        classInfo.setEndTime(t.getEndTime());
-        classInfo.setTimeDesc(t.getTimeDesc());
-        classInfo.setLocation(t.getLocation());
-        classInfo.setPrice(t.getPrice());
-        classInfo.setAccount(t.getAcount());
+        ClassInfo classInfo = ClassInfo.builder()
+                .classNo(t.getClassNo())
+                .title(t.getTitle())
+                .status(t.getStatus())
+                .genre(t.getGenre())
+                .region(t.getRegion())
+                .instructorNo1(t.getInstructor1().getMemberNo())
+                .instructorNickname1(t.getInstructor1().getNickname())
+                .instructorNo2(Optional.ofNullable(t.getInstructor2()).map(MemberMain::getMemberNo).orElse(null))
+                .instructorNickname2(Optional.ofNullable(t.getInstructor2()).map(MemberMain::getNickname).orElse(null))
+                .startDate(new SimpleDateFormat("MM/dd").format(t.getStartDate()))
+                .endDate(new SimpleDateFormat("MM/dd").format(t.getEndDate()))
+                .dateDesc(t.getDateDesc())
+                .startTime(t.getStartTime())
+                .endTime(t.getEndTime())
+                .timeDesc(t.getTimeDesc())
+                .location(t.getLocation())
+                .price(t.getPrice())
+                .account(t.getAcount())
+                .build();
 
         List<ClassDiscountInfo> discountList = new ArrayList<>();
-        for(ClassDiscount discount : t.getClassDiscountList()) {
+        for(ClassDiscount d : t.getClassDiscountList()) {
             ClassDiscountInfo classDiscountInfo = ClassDiscountInfo.builder()
-                    .type(discount.getDiscountType())
-                    .text(discount.getDiscountText())
-                    .amount(discount.getDiscountAmount())
+                    .type(d.getDiscountType())
+                    .text(d.getDiscountText())
+                    .amount(d.getDiscountAmount())
                     .build();
 
-            switch (discount.getDiscountType()) {
+            switch (d.getDiscountType()) {
                 case "E":
-                    classDiscountInfo.setTextCondition(discount.getDiscountCondition());
+                    classDiscountInfo.setDateCondition(d.getDiscountDateCondition());
                     break;
                 case "S":
                     List<DiscountClassCondition> classConditionList = new ArrayList<>();
-                    for(String classNo : discount.getDiscountCondition().split(",")) {
+                    for(String classNo : d.getDiscountClassCondition().split(",")) {
                         classConditionList.add(DiscountClassCondition.builder()
                                 .classNo(Long.parseLong(classNo))
                                 .classTitle(classesRepository.findById(Long.parseLong(classNo)).get().getTitle())
                                 .build());
                     }
-                    classDiscountInfo.setClassConditionList(classConditionList);
+                    classDiscountInfo.setClassCondition(classConditionList);
                     break;
             }
 
@@ -98,7 +95,6 @@ public class ClassesServiceImpl implements ClassesService {
         List<ClassContactInfo> contactList = new ArrayList<>();
         for(ClassContact contact : t.getClassContactList()) {
             if(contact.getMemberNo() != null) {
-
                 MemberInfo member = membersService.members(contact.getMemberNo());
                 MemberContactInfo memberContact = member.getContactList().stream()
                         .filter(x -> x.getContactType().equals(contact.getContactType()))
@@ -122,10 +118,11 @@ public class ClassesServiceImpl implements ClassesService {
         }
         classInfo.setContactList(contactList.isEmpty() ? null : contactList);
 
-        List<ClassNoticeInfo> noticeList = new ArrayList<>();
-        for(ClassNotice notice : t.getClassNoticeList())
-            noticeList.add(new ClassNoticeInfo(notice));
-        classInfo.setNoticeList(noticeList.isEmpty() ? null : noticeList);
+        Optional.ofNullable(t.getClassNoticeList()).ifPresent(noticeList -> {
+            classInfo.setNoticeList(noticeList.stream()
+                    .map(ClassNoticeInfo::new)
+                    .collect(Collectors.toList()));
+        });
 
         return classInfo;
     }
