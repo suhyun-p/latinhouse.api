@@ -1,6 +1,7 @@
 package kr.latinhouse.api.repository.classes.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import kr.latinhouse.api.controller.classes.dto.ClassNoticeRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +28,9 @@ public class ClassNotice {
 
     @Column(name = "notice")
     private String notice;
+
+    public ClassNotice(ClassNoticeRequest req) {
+        this.noticeType = req.getNoticeType();
+        this.notice = req.getNotice();
+    }
 }

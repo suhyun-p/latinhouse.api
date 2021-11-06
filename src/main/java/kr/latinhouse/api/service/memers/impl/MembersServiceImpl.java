@@ -38,13 +38,16 @@ public class MembersServiceImpl implements MembersService {
         return memberInfo.equals(new MemberInfo()) ? null : memberInfo;
     }
 
+    public MemberMain findById(long memberNo) {
+        return membersRepository.findById(memberNo).get();
+    }
+
     @Transactional
     public long members(MemberRequest req) {
         MemberMain memberMain = new MemberMain(req);
         for(MemberContactRequest memberContact : req.getContactList()) {
             memberMain.getMemberContactList().add(new MemberContact(memberContact));
         }
-
         return membersRepository.save(memberMain).getMemberNo();
     }
 }

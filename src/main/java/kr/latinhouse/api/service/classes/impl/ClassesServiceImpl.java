@@ -1,5 +1,10 @@
 package kr.latinhouse.api.service.classes.impl;
 
+import kr.latinhouse.api.controller.classes.dto.ClassContactRequest;
+import kr.latinhouse.api.controller.classes.dto.ClassDiscountRequest;
+import kr.latinhouse.api.controller.classes.dto.ClassNoticeRequest;
+import kr.latinhouse.api.controller.classes.dto.ClassRequest;
+import kr.latinhouse.api.controller.members.dto.MemberContactRequest;
 import kr.latinhouse.api.domain.classes.*;
 import kr.latinhouse.api.domain.memers.MemberContactInfo;
 import kr.latinhouse.api.domain.memers.MemberInfo;
@@ -7,12 +12,16 @@ import kr.latinhouse.api.repository.classes.ClassesRepository;
 import kr.latinhouse.api.repository.classes.dto.ClassContact;
 import kr.latinhouse.api.repository.classes.dto.ClassDiscount;
 import kr.latinhouse.api.repository.classes.dto.ClassMain;
+import kr.latinhouse.api.repository.classes.dto.ClassNotice;
+import kr.latinhouse.api.repository.members.MembersRepository;
+import kr.latinhouse.api.repository.members.dto.MemberContact;
 import kr.latinhouse.api.repository.members.dto.MemberMain;
 import kr.latinhouse.api.service.classes.ClassesService;
 import kr.latinhouse.api.service.memers.MembersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -126,5 +135,29 @@ public class ClassesServiceImpl implements ClassesService {
         });
 
         return classInfo;
+    }
+
+    @Transactional
+    public long classes(ClassRequest req) {
+        MemberMain instructor1 = membersService.findById(req.getInstructorNo1());
+        MemberMain instructor2 = null;
+        if(req.getInstructorNo2() != null) {
+            instructor2 = membersService.findById(req.getInstructorNo2());
+        }
+        ClassMain classMain = new ClassMain(req, instructor1, instructor2);
+
+        for(ClassContactRequest classContact : req.getContactList()) {
+            classMain.getClassContactList().add(new ClassContact(classContact));
+        }
+
+        for(ClassDiscountRequest classDiscount : req.getDiscountList()) {
+            classMain.getClassDiscountList().add(new ClassDiscount(classDiscount));
+        }
+
+        for(ClassNoticeRequest classNotice : req.getNoticeList()) {
+            classMain.getClassNoticeList().add(new ClassNotice(classNotice));
+        }
+
+        return classesRepository.save(classMain).getClassNo();
     }
 }

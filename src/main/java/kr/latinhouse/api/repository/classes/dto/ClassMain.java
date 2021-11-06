@@ -1,6 +1,7 @@
 package kr.latinhouse.api.repository.classes.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import kr.latinhouse.api.controller.classes.dto.ClassRequest;
 import kr.latinhouse.api.repository.members.dto.MemberMain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.lang.reflect.Member;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,15 +72,33 @@ public class ClassMain {
     @Column(name = "account")
     private String acount;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="class_no")
-    private List<ClassDiscount> classDiscountList;
+    private List<ClassDiscount> classDiscountList = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="class_no")
-    private List<ClassNotice> classNoticeList;
+    private List<ClassNotice> classNoticeList = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="class_no")
-    private List<ClassContact> classContactList;
+    private List<ClassContact> classContactList = new ArrayList<>();
+
+    public ClassMain(ClassRequest req, MemberMain instructor1, MemberMain instructor2) {
+        this.title = req.getTitle();
+        this.status = req.getStatus();
+        this.genre = req.getGenre();
+        this.region = req.getRegion();
+        this.instructor1 = instructor1;
+        this.instructor2 = instructor2;
+        this.startDate = req.getStartDate();
+        this.endDate = req.getEndDate();
+        this.dateDesc = req.getDateDesc();
+        this.startTime = req.getStartTime();
+        this.endTime = req.getEndTime();
+        this.timeDesc = req.getTimeDesc();
+        this.location = req.getLocation();
+        this.price = req.getPrice();
+        this.acount = req.getAccount();
+    }
 }
