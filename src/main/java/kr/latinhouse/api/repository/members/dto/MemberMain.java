@@ -31,7 +31,7 @@ public class MemberMain {
     @Column(name = "is_instructor")
     private Boolean isInstructor;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="member_no")
     private List<MemberContact> memberContactList = new ArrayList<>();
 
