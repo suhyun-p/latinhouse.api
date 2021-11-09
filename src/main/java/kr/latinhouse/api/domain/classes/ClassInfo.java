@@ -25,6 +25,7 @@ import java.util.Optional;
 public class ClassInfo {
     private long classNo;
     private String title;
+    private String classImage;
     private String status; // S1: Open, S2: In Progress, S3: Hold, S4: Closed
     private String genre; // S: Salsa, B: Bachata
     private String region; // GN: Gangnam, HD: Hongdae

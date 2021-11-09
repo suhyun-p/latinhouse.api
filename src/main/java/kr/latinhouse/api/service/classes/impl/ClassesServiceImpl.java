@@ -56,6 +56,7 @@ public class ClassesServiceImpl implements ClassesService {
         ClassInfo classInfo = ClassInfo.builder()
                 .classNo(t.getClassNo())
                 .title(t.getTitle())
+                .classImage(t.getClassImage())
                 .status(t.getStatus())
                 .genre(t.getGenre())
                 .region(t.getRegion())
@@ -71,7 +72,7 @@ public class ClassesServiceImpl implements ClassesService {
                 .timeDesc(t.getTimeDesc())
                 .location(t.getLocation())
                 .price(t.getPrice())
-                .account(t.getAcount())
+                .account(t.getAccount())
                 .build();
 
         List<ClassDiscountInfo> discountList = new ArrayList<>();

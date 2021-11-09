@@ -1,15 +1,11 @@
 package kr.latinhouse.api.repository.classes.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kr.latinhouse.api.controller.classes.dto.ClassRequest;
 import kr.latinhouse.api.repository.members.dto.MemberMain;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +23,9 @@ public class ClassMain {
 
     @Column(name = "title")
     private String title;
+
+    @Column(name = "class_image")
+    private String classImage;
 
     @Column(name = "status")
     private String status;
@@ -70,7 +69,7 @@ public class ClassMain {
     private BigDecimal price;
 
     @Column(name = "account")
-    private String acount;
+    private String account;
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="class_no")
@@ -99,6 +98,6 @@ public class ClassMain {
         this.timeDesc = req.getTimeDesc();
         this.location = req.getLocation();
         this.price = req.getPrice();
-        this.acount = req.getAccount();
+        this.account = req.getAccount();
     }
 }
